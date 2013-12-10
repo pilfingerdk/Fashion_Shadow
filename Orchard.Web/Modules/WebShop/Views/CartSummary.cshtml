@@ -1,0 +1,15 @@
+﻿@* Display number of items in cart, total value, and show a link to cart view.*@
+@{
+    Style.Include("SimpleShop.css");
+}
+<div id= "cart">
+    <span class="caption">
+    <b>Your cart:</b>
+    @Model.TotalItems item(s),    
+    @Model.TotalValue.ToString("c")
+    </span>
+    @Html.ActionLink("Checkout", "Index", "Cart", 
+    new { Controller = "Cart", Area = "SimpleShop", 
+        returnUrl = Context.Request.Url.PathAndQuery }, null)
+     
+</div>

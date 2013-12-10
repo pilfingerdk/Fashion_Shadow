@@ -1,0 +1,20 @@
+﻿@*@if(Model.ImageUrl != null && !string.IsNullOrEmpty(Model.ImageUrl)) {
+    <img src="@Model.ImageUrl" width="250" />
+}*@
+
+<br/>
+@Model.Description<br />
+
+<div class="item">
+
+    @using(Html.BeginForm("AddToCart", "Cart", 
+        new { Controller = "Cart", Area = "SimpleShop", 
+            productId = Model.ItemId, 
+            productTitle = Model.Title, 
+            returnUrl = Context.Request.Url.PathAndQuery})) {
+           
+        <input type="submit" value="+ Add to cart" />
+    }
+
+    </div>
+@T("Price"): <b>@Model.Price.ToString("c")</b><br />

@@ -1,0 +1,11 @@
+﻿Name: Maps
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: A map.
+Features:
+    Maps:
+        Description: A map.
+		Category: Map

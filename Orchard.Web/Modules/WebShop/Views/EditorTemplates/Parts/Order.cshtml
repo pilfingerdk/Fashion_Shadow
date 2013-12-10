@@ -1,0 +1,35 @@
+﻿@model SimpleShop.Models.OrderPart
+@using Orchard.Utility.Extensions;
+
+@{
+    Script.Require("jQuery").AtHead();    
+}
+
+<fieldset>
+
+    <label class="sub" for="FirstName">@T("FirstName")</label><br />
+    @Html.TextAreaFor(m => m.FirstName, new { @class = "text", @style = "width:99%" })
+
+    <label class="sub" for="LastName">@T("LastName")</label><br />
+    @Html.TextAreaFor(m => m.LastName, new { @class = "text", @style = "width:99%" })
+
+    <label class="sub" for="Line1">@T("Address Line 1")</label><br />
+    @Html.TextBoxFor(m => m.Line1, new { @class = "text" })<br />
+
+     <label class="sub" for="Line2">@T("Address Line 2")</label><br />
+    @Html.TextBoxFor(m => m.Line2, new { @class = "text" })<br />
+
+    
+    <label class="sub" for="Postcode">@T("Postcode")</label><br />
+    @Html.TextBoxFor(m => m.PostCode, new { @class = "text" })<br/>
+
+    <label class="sub" for="City">@T("City")</label><br />
+    @Html.TextBoxFor(m => m.City, new { @class = "text", @style = "width:70%" })<br/>
+
+    <label class="sub" for="Country">@T("Country")</label><br />
+    @Html.TextBoxFor(m => m.Country, new { @class = "text", @style = "width:70%" })<br/>
+
+    <label class="sub" for="GiftWrap">@T("GiftWrap")</label><br />
+    @Html.CheckBoxFor(m => m.GiftWrap)<br/>
+
+</fieldset>

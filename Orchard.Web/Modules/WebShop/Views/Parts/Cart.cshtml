@@ -1,0 +1,50 @@
+﻿@{
+    Style.Include("SimpleShop.css");
+}
+<h2>Your Cart</h2>
+<table width="90%" align="center">
+<thead>
+<tr>
+<th align="center">Quantity</th>
+<th align="left">Item</th>
+<th align="right">Price</th>
+<th align="right">Subtotal item(s)</th>
+</tr>
+</thead>
+<tbody>
+@foreach (var line in Model.Lines)
+{
+    <tr>
+    <td align="center">@line.Quantity</td>
+    <td align="left">@line.ProductTitle</td>    
+    <td align="right">@line.Price.ToString("c")</td>
+    <td align="right">@((line.Quantity * line.Price).ToString("c"))</td>
+    <td>
+        @using (Html.BeginForm("RemoveFromCart", "Cart", 
+            new { Controller = "Cart", Area = "SimpleShop", 
+                productId = line.ProductId, 
+                productTitle = line.ProductTitle, 
+                returnUrl = Context.Request.Url.PathAndQuery}))
+        {            
+            <input class="actionButtons" type= "submit" value="Remove item" />
+        }
+    </td>
+    </tr>
+    
+}    
+</tbody>
+    <tfoot>
+    <tr>
+    <td colspan="3" align="right">Total:</td>
+     <td align="right">
+     @Model.TotalValue.ToString("c")
+     </td>
+    </tr></tfoot>
+</table>
+
+<p align="center" class="actionButtons">
+    <a href="@Model.ReturnUrl">Continue shopping</a>
+    @Html.ActionLink("Checkout now", "Checkout", 
+    new { Controller = "Order", Area = "SimpleShop", 
+        returnUrl = Context.Request.Url.PathAndQuery}, null)
+</p>

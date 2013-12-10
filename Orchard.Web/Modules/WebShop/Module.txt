@@ -1,0 +1,12 @@
+Name: SimpleShop
+AntiForgery: disabled
+Author: Finn Vilsbæk
+Website: http://www.panmedia.dk
+Version: 1.0
+OrchardVersion: 1.0
+Description: Minimalist E-Commerce implementation
+Features:
+    Simpleshop:	
+        Description: Small footprint PayPal Ecommerce.
+		Category: Commerce
+		Dependencies: Contents, Common, Settings, Orchard.jQuery, Orchard.MediaLibrary

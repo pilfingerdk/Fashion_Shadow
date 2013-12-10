@@ -1,0 +1,66 @@
+﻿@model SimpleShop.ViewModels.CheckoutVM
+@using SimpleShop.Helpers;
+
+
+@{
+    Style.Include("SimpleShop.css");
+    Style.Include("Order.css");
+}
+
+@* display cart and order information 1: shopping cart summary *@
+<h2>Your Order</h2>
+<table width="90%" align="center">
+<thead>
+<tr>
+<th align="center">Quantity</th>
+<th align="left">Item</th>
+<th align="right">Price</th>
+<th align="right">Subtotal item(s)</th>
+</tr>
+</thead>
+<tbody>
+@foreach (var line in Model.CheckoutCart.Lines)
+{
+    <tr>
+    <td align="center">@line.Quantity</td>
+    <td align="left">@line.ProductTitle</td>    
+    <td align="right">@line.Price.ToString("c")</td>
+    <td align="right">@((line.Quantity * line.Price).ToString("c"))</td>    
+    </tr>
+    
+}    
+</tbody>
+    <tfoot>
+    <tr>
+    <td colspan="3" align="right">Total:</td>
+     <td align="right">
+     @Model.TotalValue.ToString("c")
+     </td>
+    </tr></tfoot>
+</table>
+
+@* display cart and order information 2: order detail summary *@
+<p>
+Order will ship to this address:
+<br />
+<br />
+@Model.CheckoutOrder.FirstName<br />
+@Model.CheckoutOrder.LastName<br />
+@Model.CheckoutOrder.Line1<br />
+@{if (Model.CheckoutOrder.Line2 != null)
+  {  
+    @Model.CheckoutOrder.Line2<br />
+  }
+}
+@Model.CheckoutOrder.City<br />
+@Model.CheckoutOrder.PostCode<br />
+@Model.CheckoutOrder.Country<br />
+
+</p>
+@* display the Paypal XpressCheckoutButton and do the call to pay method on order controller *@
+    
+@using (Html.BeginForm("Pay", "Order"))
+{
+   <input type='image' name='submit'
+      src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' />
+}

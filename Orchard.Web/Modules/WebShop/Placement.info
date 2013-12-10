@@ -1,0 +1,42 @@
+﻿<Placement>  
+    <Match ContentType="Product">
+      <Match DisplayType="Detail">
+        <Place Parts_Product_Image="Content:0"/>
+        <Place Parts_Product="Content:1" />        
+        <Place Parts_Common_Body="Content:1" />
+      </Match>      
+      <Match DisplayType="Summary">
+        <Place
+               Parts_Common_Body_Summary="Content:Last"
+               Parts_Common_Metadata_Summary="Nowhere" />
+      </Match> 
+    </Match> 
+    <Place Parts_Product_Edit="Content:1"/>
+    <Place Parts_Product="Content:2"/>
+
+  <Match ContentType="Order">
+    <Match DisplayType="Detail">
+      <Place Parts_Common_Body="Content:1" />
+    </Match>
+    <Match DisplayType="Summary">
+      <Place
+             Parts_Common_Body_Summary="Content:Last"
+             Parts_Common_Metadata_Summary="Nowhere" />
+    </Match>
+  </Match>
+  <Place Parts_Order_Edit="Content:1"/>
+  <Place Parts_Order="Content:3"/>
+
+  <Match ContentType="Customer">
+    <Match DisplayType="Detail">
+      <Place Parts_Common_Body="Content:1" />
+    </Match>
+    <Match DisplayType="Summary">
+      <Place
+             Parts_Common_Body_Summary="Content:Last"
+             Parts_Common_Metadata_Summary="Nowhere" />
+    </Match>
+  </Match>
+  <Place Parts_Customer_Edit="Content:1"/>
+  <Place Parts_Customer="Content:4"/>
+</Placement>

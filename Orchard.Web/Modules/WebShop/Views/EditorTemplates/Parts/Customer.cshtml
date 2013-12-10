@@ -1,0 +1,9 @@
+﻿@model SimpleShop.Models.CustomerPart
+<fieldset>
+    <label class="sub" for="Email">@T("Email")</label><br />
+    @Html.TextAreaFor(m => m.Email, 5, 200, new { @class = "text", @style = "width:99%" })    
+
+    <label class="sub" for="PhoneNumber">@T("PhoneNumber")</label><br />
+    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "text" })<br /> 
+
+</fieldset>

@@ -1,0 +1,11 @@
+﻿Name: EventManager
+AntiForgery: disabled
+Author: Andreas
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: Create events and allow site user to sign up for them
+Features:
+    EventManager:
+        Description: Create member events and allow site users to sign up for them.
+		Category: Social

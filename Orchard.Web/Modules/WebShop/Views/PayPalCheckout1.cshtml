@@ -1,0 +1,95 @@
+﻿@model SimpleShop.ViewModels.CheckoutVM
+@using SimpleShop.Helpers;
+@using PayPal;
+
+@{
+    Style.Include("SimpleShop.css");
+    Style.Include("Order.css");
+}
+
+@{ PayPal.Profile.Initialize(
+       
+       "{yourAPIUsername}",
+       "{yourAPIPassword}", 
+       "{yourSignature}", 
+       "sandbox");        
+       
+       // General Adaptive Payments’ properties 
+       PayPal.Profile.Language = "da_DK"; // "en_US"; 
+       PayPal.Profile.CancelUrl = "http://localhost/OrderFailed.cshtml"; 
+       PayPal.Profile.ReturnUrl = "http://localhost/OrderCompleted.cshtml"; 
+       PayPal.Profile.IpnUrl = "http://localhost/Notifications.cshtml";
+       PayPal.Profile.CurrencyCode = "DKK"; // "USD";
+}
+
+@{var dynAmount = Model.TotalValue.ToString("f").Replace(",", ".");  // Sandbox acc fejler på komma, API'et vil have et heltal, punktum som delimiter og to nuller    
+    var testAmount = "7584.00";
+    var payPalButton = PayPal.ButtonManager.BuyNowButton.Create(
+    business: "xxxxxxx_biz@gmail.com",  // "{sellerEmail}",
+    itemName: "Your chosen estore products",
+    // amount: testAmount); // this format will show a button
+    amount: dynAmount); // Generates fx kr. 7.584.00 if tostring param is c instead of f     
+      
+    HtmlString payPalButtonHtml = new HtmlString(payPalButton.WebSiteCode);    
+}
+
+@* display cart and order information 1: shopping cart summary *@
+<div class="order-wrapper">
+    <article class="order">
+    <table>
+        <thead>
+            <tr>
+                <td>Item</td>
+                <td class="numeric">Quantity</td>
+                <td class="numeric">Price</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CheckoutCart.Lines)
+            {
+                <tr>
+                  <td>@item.ProductTitle</td>
+                  <td class="numeric">@item.Quantity</td>
+                  <td class="numeric">@item.Price.ToString("c")</td>
+                </tr>
+            }
+
+        </tbody>
+        <tfoot>
+            <tr class="separator"><td colspan="4">&nbsp;</td></tr>
+            <tr>
+                <td class="numeric label" colspan="2">VAT (19%):</td>
+                <td class="numeric">$9.99</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="numeric label" colspan="2">Total:</td>
+                <td class="numeric">$9.99</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    
+</article>
+
+@* display cart and order information 2: order detail summary *@
+Ship to address:
+<br />
+@Model.CheckoutOrder.FirstName<br />
+@Model.CheckoutOrder.LastName<br />
+@Model.CheckoutOrder.Line1<br />
+@{if (Model.CheckoutOrder.Line2 != null)
+  {  
+    @Model.CheckoutOrder.Line2<br />
+  }
+}
+@Model.CheckoutOrder.City<br />
+@Model.CheckoutOrder.PostCode<br />
+@Model.CheckoutOrder.Country<br />
+
+<div id = ppbtn1>
+     @payPalButtonHtml
+   </div> 
+    
+     
